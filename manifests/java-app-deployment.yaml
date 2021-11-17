@@ -2,19 +2,33 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: javaApp
+  namespace: t2
 spec:
   replicas: 2
-  revisionHistoryLimit: 3
+  
   selector:
     matchLabels:
-    app: javaApp
+      app: javaApp
   template:
     metadata:
       labels:
         app: javaApp
     spec:
-    containers:
-    - image: 3.89.70.197:32002/jenkins-example:149
-      name: javaApp
-      ports:
-      - containerPort: 80
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: deploy
+                operator: In
+                values:
+                - nexus
+      containers:
+      - image: 3.89.70.197:32002/jenkins-example:149
+        name: javaApp
+        ports:
+        - containerPort: 80
+      imagePullSecrets:
+      - name: docker-auth
+
+
