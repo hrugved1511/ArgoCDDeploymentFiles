@@ -23,7 +23,7 @@ spec:
                 values:
                 - nexus
       containers:
-      - image: 3.89.70.197:32002/jenkins-example:5
+      - image: 3.89.70.197:32002/jenkins-example:6
         name: java-app
         ports:
         - containerPort: 80
