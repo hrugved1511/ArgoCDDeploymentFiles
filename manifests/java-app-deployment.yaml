@@ -4,7 +4,7 @@ metadata:
   name: java-app
   namespace: t2
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       app: java-app
